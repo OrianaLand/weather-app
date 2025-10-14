@@ -1,9 +1,5 @@
 import "./styles.css";
 
-const WEATHER_API_KEY = "S9KDA5JKXRYPPGPT549CSGK28";
-const BASE_URL =
-  "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/";
-
 const parseResponse = (response) => {
   console.log("unparsed response:");
   console.log(response);
@@ -17,11 +13,16 @@ const parseWeatherData = (data) => {
   return {
     location: data.resolvedAddress,
     current: {
+      date: data.days[0].datetime,
+      time: data.currentConditions.datetime,
       temp: data.currentConditions.temp,
       feelsLike: data.currentConditions.feelslike,
       humidity: data.currentConditions.humidity,
       conditions: data.currentConditions.conditions,
       icon: data.currentConditions.icon,
+      windSpeed: data.currentConditions.windspeed,
+      uvIndex: data.currentConditions.uvindex,
+      rainProbability: data.currentConditions.precipprob,
     },
     forecast: data.days.map((day) => ({
       date: day.datetime,
@@ -51,5 +52,15 @@ async function getWeather(city) {
     console.log(error);
   }
 }
+
+const button = document.querySelector(".search-btn");
+const input = document.querySelector(".search-input");
+
+button.addEventListener("click", (e) => {
+  e.preventDefault;
+  const city = input.value;
+  console.log(city);
+  getWeather(city);
+});
 
 getWeather("Caracas");
