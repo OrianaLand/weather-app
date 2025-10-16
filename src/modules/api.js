@@ -45,6 +45,6 @@ export async function getWeather(city) {
     const parsedData = parseWeatherData(data);
     return parsedData;
   } catch (error) {
-    return Promise.reject(error);
+    throw error;
   }
 }
