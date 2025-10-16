@@ -30,6 +30,7 @@ const parseWeatherData = (data) => {
       icon: day.icon,
     })),
     description: data.description,
+    timezone: data.timezone,
   };
 };
 
@@ -42,7 +43,9 @@ export async function getWeather(city) {
     }
 
     const data = await parseResponse(response);
+    console.log(data);
     const parsedData = parseWeatherData(data);
+    console.log(parsedData);
     return parsedData;
   } catch (error) {
     throw error;

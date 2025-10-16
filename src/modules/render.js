@@ -42,9 +42,7 @@ const renderTodayDetails = (data) => {
 
 const renderPredictions = (data) => {
   const predictionsValuesArray = data.forecast;
-  console.log(predictionsValuesArray);
   const keysForPredictionValues = Object.keys(predictionsValuesArray[0]);
-  console.log(keysForPredictionValues);
   const predictionList = document.querySelector(".predictions-list");
 
   for (let i = 0; i < predictionList.children.length; i++) {
@@ -66,6 +64,7 @@ const renderPredictions = (data) => {
 export function initUI() {
   const button = document.querySelector(".search-btn");
   const input = document.querySelector(".search-input");
+  let formatedData = {};
   let data = {};
 
   const handleSearch = async () => {
@@ -75,10 +74,11 @@ export function initUI() {
         alert("Please enter a city");
         return;
       }
-      data = await formatWeatherData(city);
-      renderTodayForecast(data);
-      renderTodayDetails(data);
-      renderPredictions(data);
+      data = await getWeather(city);
+      formatedData = formatWeatherData(data);
+      renderTodayForecast(formatedData);
+      renderTodayDetails(formatedData);
+      renderPredictions(formatedData);
       console.log(data);
     } catch (error) {
       console.log(error);
@@ -100,7 +100,8 @@ export function initUI() {
 }
 
 //This is for testing only and will be removed later
-formatWeatherData("Buenos Aires")
+getWeather("Buenos Aires")
+  .then(formatWeatherData)
   .then((data) => {
     renderTodayForecast(data);
     renderTodayDetails(data);
