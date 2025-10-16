@@ -70,12 +70,22 @@ export function initUI() {
 
   button.addEventListener("click", async (e) => {
     e.preventDefault();
-    const city = input.value;
-    data = await formatWeatherData(city);
-    renderTodayForecast(data);
-    renderTodayDetails(data);
-    renderPredictions(data);
-    console.log(data);
+
+    try {
+      const city = input.value;
+      if (!city.trim()) {
+        alert("Please enter a city");
+        return;
+      }
+      data = await formatWeatherData(city);
+      renderTodayForecast(data);
+      renderTodayDetails(data);
+      renderPredictions(data);
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+      alert("Failed to fetch weather data.");
+    }
   });
 }
 
