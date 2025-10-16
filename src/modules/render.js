@@ -68,9 +68,7 @@ export function initUI() {
   const input = document.querySelector(".search-input");
   let data = {};
 
-  button.addEventListener("click", async (e) => {
-    e.preventDefault();
-
+  const handleSearch = async () => {
     try {
       const city = input.value;
       if (!city.trim()) {
@@ -85,6 +83,18 @@ export function initUI() {
     } catch (error) {
       console.log(error);
       alert("Failed to fetch weather data.");
+    }
+  };
+
+  button.addEventListener("click", async (e) => {
+    e.preventDefault();
+    await handleSearch();
+  });
+
+  input.addEventListener("keypress", async (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      await handleSearch();
     }
   });
 }
