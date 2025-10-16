@@ -32,8 +32,11 @@ const renderTodayDetails = (data) => {
   const detailsList = document.querySelector(".details-list");
 
   for (let i = 0; i < detailsList.children.length; i++) {
-    detailsList.children[i].children[1].textContent =
-      detailValues[keysForDetailValues[i]];
+    const key = keysForDetailValues[i];
+    const element = detailsList.querySelector(
+      `[data-key="${key}"] .detail-value`
+    );
+    element.textContent = detailValues[key];
   }
 };
 
