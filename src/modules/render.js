@@ -1,5 +1,13 @@
 import { getWeather } from "./api.js";
 import { formatWeatherData } from "./dataFormater.js";
+import {
+  TEMP_UNITS,
+  getCurrentTempUnit,
+  setCurrentTempUnit,
+} from "./unitConverter.js";
+
+//Store formatted weather data for units conversion
+let formattedData = null;
 
 const renderTodayForecast = (data) => {
   //Today's forecast card
@@ -61,10 +69,39 @@ const renderPredictions = (data) => {
   }
 };
 
+const initTempUnitToggle = () => {
+  const toggleTempUnitBtn = document.querySelector(".temp-unit-toggle");
+
+  if (!toggleTempUnitBtn) {
+    console.warn("Unit toggle button not found");
+    return;
+  }
+
+  console.log("current temp unit:" + getCurrentTempUnit());
+  toggleTempUnitBtn.addEventListener("click", () => {
+    const newTempUnit =
+      getCurrentTempUnit() === TEMP_UNITS.FAHRENHEIT
+        ? TEMP_UNITS.CELSIUS
+        : TEMP_UNITS.FAHRENHEIT;
+    setCurrentTempUnit(newTempUnit);
+    console.log("New temp unit: " + newTempUnit);
+    console.log("Data: " + formattedData);
+    //Re render with new unit if we have data
+    if (formattedData) {
+      renderTodayForecast(formattedData);
+      renderTodayDetails(formattedData);
+      renderPredictions(formattedData);
+    }
+  });
+};
+
 export function initUI() {
-  const button = document.querySelector(".search-btn");
+  // Initialize the temperature unit toggle
+  initTempUnitToggle();
+
+  const searchBtn = document.querySelector(".search-btn");
   const input = document.querySelector(".search-input");
-  let formatedData = {};
+
   let data = {};
 
   const handleSearch = async () => {
@@ -75,10 +112,10 @@ export function initUI() {
         return;
       }
       data = await getWeather(city);
-      formatedData = formatWeatherData(data);
-      renderTodayForecast(formatedData);
-      renderTodayDetails(formatedData);
-      renderPredictions(formatedData);
+      formattedData = formatWeatherData(data);
+      renderTodayForecast(formattedData);
+      renderTodayDetails(formattedData);
+      renderPredictions(formattedData);
       console.log(data);
     } catch (error) {
       console.log(error);
@@ -86,7 +123,7 @@ export function initUI() {
     }
   };
 
-  button.addEventListener("click", async (e) => {
+  searchBtn.addEventListener("click", async (e) => {
     e.preventDefault();
     await handleSearch();
   });

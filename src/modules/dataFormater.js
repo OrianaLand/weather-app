@@ -1,3 +1,4 @@
+import { TEMP_UNITS } from "./unitConverter.js";
 const formatDate = (date, tz) => {
   const options = { weekday: "long", month: "short", day: "numeric" };
   const dateObj = new Date(date);
@@ -18,6 +19,7 @@ export function formatWeatherData(data) {
 
   const formatedData = {
     location: data.location,
+    sourceUnit: TEMP_UNITS.FAHRENHEIT, //API returns temperature in Fahrenheit
     current: {
       date: formatDate(data.current.date, timeZone),
       time: formatTime(timeZone),
