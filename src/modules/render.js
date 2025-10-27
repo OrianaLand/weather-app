@@ -79,23 +79,38 @@ const renderTodayDetails = (data) => {
 };
 
 const renderPredictions = (data) => {
-  const predictionsValuesArray = data.forecast;
-  const keysForPredictionValues = Object.keys(predictionsValuesArray[0]);
+  const currentUnit = getCurrentTempUnit();
+  const predictionDays = data.forecast; //Array of 15 days forecast
+  /* const keysForPredictionValues = Object.keys(predictionsValuesArray[0]); */
   const predictionList = document.querySelector(".predictions-list");
 
+  console.log(predictionDays);
   for (let i = 0; i < predictionList.children.length; i++) {
+    const day = predictionDays[i];
+    const tempMinUI = convertTemperature(
+      day.tempMin,
+      data.sourceUnit,
+      currentUnit
+    );
+    const tempMaxUI = convertTemperature(
+      day.tempMax,
+      data.sourceUnit,
+      currentUnit
+    );
     //Day
-    predictionList.children[i].children[0].textContent =
-      predictionsValuesArray[i][keysForPredictionValues[0]];
+    predictionList.children[i].children[0].textContent = day.date;
 
     //Conditions
     predictionList.children[i].children[1].children[0].textContent =
-      predictionsValuesArray[i][keysForPredictionValues[1]];
+      day.conditions;
 
     //Temperature
-    predictionList.children[i].children[1].children[1].textContent = `${
-      predictionsValuesArray[i][keysForPredictionValues[2]]
-    } / ${predictionsValuesArray[i][keysForPredictionValues[3]]}`;
+    predictionList.children[
+      i
+    ].children[1].children[1].textContent = `${formatTemperature(
+      tempMinUI,
+      currentUnit
+    )} / ${formatTemperature(tempMaxUI, currentUnit)}`;
   }
 };
 
