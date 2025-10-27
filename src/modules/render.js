@@ -50,11 +50,18 @@ const renderTodayForecast = (data) => {
 };
 
 const renderTodayDetails = (data) => {
+  const currentUnit = getCurrentTempUnit();
+  const feelsLikeUI = convertTemperature(
+    data.current.feelsLike,
+    data.sourceUnit,
+    currentUnit
+  );
+
   const detailValues = {
-    thermalSensation: data.current.feelsLike,
-    rainProbability: data.current.rainProbability,
+    thermalSensation: formatTemperature(feelsLikeUI, currentUnit),
+    rainProbability: `${data.current.rainProbability}%`,
     windSpeed: data.current.windSpeed,
-    humidity: data.current.humidity,
+    humidity: `${data.current.humidity}%`,
     uvIndex: data.current.uvIndex,
   };
 
