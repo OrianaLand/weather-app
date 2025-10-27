@@ -4,10 +4,12 @@ import {
   TEMP_UNITS,
   getCurrentTempUnit,
   setCurrentTempUnit,
+  convertTemperature,
 } from "./unitConverter.js";
 
-//Store formatted weather data for units conversion
+//Store formatted data for units conversion
 let formattedData = null;
+let tempUnitUI = getCurrentTempUnit();
 
 const renderTodayForecast = (data) => {
   //Today's forecast card
@@ -18,11 +20,30 @@ const renderTodayForecast = (data) => {
   const tempRanges = document.querySelector(".ranges-temp");
   const conditions = document.querySelector(".weather-conditions");
 
+  const currentUnit = getCurrentTempUnit();
+
+  const tempUI = convertTemperature(
+    data.current.temp,
+    data.sourceUnit,
+    currentUnit
+  );
+
+  const tempMinUI = convertTemperature(
+    data.current.tempMin,
+    data.sourceUnit,
+    currentUnit
+  );
+  const tempMaxUI = convertTemperature(
+    data.current.tempMax,
+    data.sourceUnit,
+    currentUnit
+  );
+
   city.textContent = data.location;
   date.textContent = data.current.date;
   time.textContent = data.current.time;
-  temperature.textContent = data.current.temp;
-  tempRanges.textContent = `${data.current.tempMin} / ${data.current.tempMax}`;
+  temperature.textContent = `${tempUI}°${currentUnit}`;
+  tempRanges.textContent = `${tempMinUI}°${currentUnit} / ${tempMaxUI}°${currentUnit}`;
   conditions.textContent = data.current.conditions;
 };
 
@@ -77,21 +98,30 @@ const initTempUnitToggle = () => {
     return;
   }
 
-  console.log("current temp unit:" + getCurrentTempUnit());
+  console.log("Initial temp unit:", getCurrentTempUnit());
+
   toggleTempUnitBtn.addEventListener("click", () => {
+    //toggle temperature unit
     const newTempUnit =
       getCurrentTempUnit() === TEMP_UNITS.FAHRENHEIT
         ? TEMP_UNITS.CELSIUS
         : TEMP_UNITS.FAHRENHEIT;
+
     setCurrentTempUnit(newTempUnit);
-    console.log("New temp unit: " + newTempUnit);
-    console.log("Data: " + formattedData);
+
     //Re render with new unit if we have data
     if (formattedData) {
       renderTodayForecast(formattedData);
       renderTodayDetails(formattedData);
       renderPredictions(formattedData);
+
+      //Update temperature unit currently displayed
+      /* tempUnitUI = getCurrentTempUnit();
+      console.log(tempUnitUI); */
     }
+    //Update temperature unit currently displayed when there is toggle with no data
+    /* tempUnitUI = getCurrentTempUnit();
+    console.log(tempUnitUI); */
   });
 };
 
@@ -113,13 +143,17 @@ export function initUI() {
       }
       data = await getWeather(city);
       formattedData = formatWeatherData(data);
+
+      // Render UI
       renderTodayForecast(formattedData);
       renderTodayDetails(formattedData);
       renderPredictions(formattedData);
+
       console.log(data);
     } catch (error) {
       console.log(error);
-      alert("Failed to fetch weather data.");
+      console.error("Search error:", error);
+      alert(`Failed to fetch weather data: ${error.message}`);
     }
   };
 
@@ -137,7 +171,7 @@ export function initUI() {
 }
 
 //This is for testing only and will be removed later
-getWeather("Buenos Aires")
+/* getWeather("Buenos Aires")
   .then(formatWeatherData)
   .then((data) => {
     renderTodayForecast(data);
@@ -145,3 +179,4 @@ getWeather("Buenos Aires")
     renderPredictions(data);
   })
   .catch((err) => console.error(err));
+ */
