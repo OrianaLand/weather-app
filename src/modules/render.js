@@ -5,6 +5,7 @@ import {
   getCurrentTempUnit,
   setCurrentTempUnit,
   convertTemperature,
+  formatTemperature,
 } from "./unitConverter.js";
 
 //Store formatted data for units conversion
@@ -42,8 +43,9 @@ const renderTodayForecast = (data) => {
   city.textContent = data.location;
   date.textContent = data.current.date;
   time.textContent = data.current.time;
-  temperature.textContent = `${tempUI}°${currentUnit}`;
-  tempRanges.textContent = `${tempMinUI}°${currentUnit} / ${tempMaxUI}°${currentUnit}`;
+  temperature.textContent = formatTemperature(tempUI, currentUnit);
+  tempRanges.textContent = `${formatTemperature(tempMinUI, currentUnit)} 
+  / ${formatTemperature(tempMaxUI, currentUnit)}`;
   conditions.textContent = data.current.conditions;
 };
 
@@ -114,14 +116,7 @@ const initTempUnitToggle = () => {
       renderTodayForecast(formattedData);
       renderTodayDetails(formattedData);
       renderPredictions(formattedData);
-
-      //Update temperature unit currently displayed
-      /* tempUnitUI = getCurrentTempUnit();
-      console.log(tempUnitUI); */
     }
-    //Update temperature unit currently displayed when there is toggle with no data
-    /* tempUnitUI = getCurrentTempUnit();
-    console.log(tempUnitUI); */
   });
 };
 
@@ -169,14 +164,3 @@ export function initUI() {
     }
   });
 }
-
-//This is for testing only and will be removed later
-/* getWeather("Buenos Aires")
-  .then(formatWeatherData)
-  .then((data) => {
-    renderTodayForecast(data);
-    renderTodayDetails(data);
-    renderPredictions(data);
-  })
-  .catch((err) => console.error(err));
- */

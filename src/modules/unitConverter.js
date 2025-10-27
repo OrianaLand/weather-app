@@ -43,3 +43,7 @@ export function convertTemperature(temp, fromUnit, toUnit) {
   }
   return Number(temp).toFixed(1);
 }
+
+export const formatTemperature = (temp, unit = currentUnit) => {
+  return `${temp}°${unit}`;
+};
