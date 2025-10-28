@@ -2,10 +2,15 @@ import { getWeather } from "./api.js";
 import { formatWeatherData } from "./dataFormater.js";
 import {
   TEMP_UNITS,
+  SPEED_UNITS,
   getCurrentTempUnit,
+  getCurrentSpeedUnit,
   setCurrentTempUnit,
+  setCurrentSpeedUnit,
   convertTemperature,
+  convertSpeed,
   formatTemperature,
+  formatSpeed,
 } from "./unitConverter.js";
 
 //Store formatted data for units conversion
@@ -21,46 +26,55 @@ const renderTodayForecast = (data) => {
   const tempRanges = document.querySelector(".ranges-temp");
   const conditions = document.querySelector(".weather-conditions");
 
-  const currentUnit = getCurrentTempUnit();
+  const currentTempUnit = getCurrentTempUnit();
 
   const tempUI = convertTemperature(
     data.current.temp,
     data.sourceUnit,
-    currentUnit
+    currentTempUnit
   );
 
   const tempMinUI = convertTemperature(
     data.current.tempMin,
     data.sourceUnit,
-    currentUnit
+    currentTempUnit
   );
   const tempMaxUI = convertTemperature(
     data.current.tempMax,
     data.sourceUnit,
-    currentUnit
+    currentTempUnit
   );
 
   city.textContent = data.location;
   date.textContent = data.current.date;
   time.textContent = data.current.time;
-  temperature.textContent = formatTemperature(tempUI, currentUnit);
-  tempRanges.textContent = `${formatTemperature(tempMinUI, currentUnit)} 
-  / ${formatTemperature(tempMaxUI, currentUnit)}`;
+  temperature.textContent = formatTemperature(tempUI, currentTempUnit);
+  tempRanges.textContent = `${formatTemperature(tempMinUI, currentTempUnit)} 
+  / ${formatTemperature(tempMaxUI, currentTempUnit)}`;
   conditions.textContent = data.current.conditions;
 };
 
 const renderTodayDetails = (data) => {
-  const currentUnit = getCurrentTempUnit();
+  //Temperature
+  const currentTempUnit = getCurrentTempUnit();
   const feelsLikeUI = convertTemperature(
     data.current.feelsLike,
     data.sourceUnit,
-    currentUnit
+    currentTempUnit
+  );
+
+  //Speed
+  const currentSpeedUnit = getCurrentSpeedUnit();
+  const speedUI = convertSpeed(
+    data.current.windSpeed,
+    data.sourceSpeedUnit,
+    currentSpeedUnit
   );
 
   const detailValues = {
-    thermalSensation: formatTemperature(feelsLikeUI, currentUnit),
+    thermalSensation: formatTemperature(feelsLikeUI, currentTempUnit),
     rainProbability: `${data.current.rainProbability}%`,
-    windSpeed: data.current.windSpeed,
+    windSpeed: formatSpeed(speedUI, currentSpeedUnit),
     humidity: `${data.current.humidity}%`,
     uvIndex: data.current.uvIndex,
   };
@@ -79,23 +93,21 @@ const renderTodayDetails = (data) => {
 };
 
 const renderPredictions = (data) => {
-  const currentUnit = getCurrentTempUnit();
+  const currentTempUnit = getCurrentTempUnit();
   const predictionDays = data.forecast; //Array of 15 days forecast
-  /* const keysForPredictionValues = Object.keys(predictionsValuesArray[0]); */
   const predictionList = document.querySelector(".predictions-list");
 
-  console.log(predictionDays);
   for (let i = 0; i < predictionList.children.length; i++) {
     const day = predictionDays[i];
     const tempMinUI = convertTemperature(
       day.tempMin,
       data.sourceUnit,
-      currentUnit
+      currentTempUnit
     );
     const tempMaxUI = convertTemperature(
       day.tempMax,
       data.sourceUnit,
-      currentUnit
+      currentTempUnit
     );
     //Day
     predictionList.children[i].children[0].textContent = day.date;
@@ -109,8 +121,8 @@ const renderPredictions = (data) => {
       i
     ].children[1].children[1].textContent = `${formatTemperature(
       tempMinUI,
-      currentUnit
-    )} / ${formatTemperature(tempMaxUI, currentUnit)}`;
+      currentTempUnit
+    )} / ${formatTemperature(tempMaxUI, currentTempUnit)}`;
   }
 };
 
@@ -130,8 +142,14 @@ const initTempUnitToggle = () => {
       getCurrentTempUnit() === TEMP_UNITS.FAHRENHEIT
         ? TEMP_UNITS.CELSIUS
         : TEMP_UNITS.FAHRENHEIT;
-
     setCurrentTempUnit(newTempUnit);
+
+    //toggle speed unit
+    const newSpeedUnit =
+      getCurrentSpeedUnit() === SPEED_UNITS.MILE
+        ? SPEED_UNITS.KILOMETER
+        : SPEED_UNITS.MILE;
+    setCurrentSpeedUnit(newSpeedUnit);
 
     //Re render with new unit if we have data
     if (formattedData) {
