@@ -17,6 +17,82 @@ import {
 let formattedData = null;
 let tempUnitUI = getCurrentTempUnit();
 
+//mock data to avoid unnecesary API calls
+const mockWeatherData = {
+  timezone: "America/Argentina/Buenos_Aires",
+  location: "Buenos Aires, Argentina",
+  sourceUnit: TEMP_UNITS.FAHRENHEIT, // API normally returns °F
+  sourceSpeedUnit: SPEED_UNITS.MILE, // API normally returns mph
+  current: {
+    date: "2025-10-14",
+    time: "15:30",
+    temp: 75,
+    tempMin: 68,
+    tempMax: 79,
+    feelsLike: 77,
+    humidity: 62,
+    conditions: "Partly Cloudy",
+    icon: "partly-cloudy-day",
+    windSpeed: 9,
+    uvIndex: 4,
+    rainProbability: 20,
+  },
+  forecast: [
+    {
+      date: "2025-10-15",
+      conditions: "Mostly Sunny",
+      tempMin: 66,
+      tempMax: 82,
+      icon: "clear-day",
+    },
+    {
+      date: "2025-10-16",
+      conditions: "Overcast",
+      tempMin: 64,
+      tempMax: 75,
+      icon: "cloudy",
+    },
+    {
+      date: "2025-10-17",
+      conditions: "Rain Showers",
+      tempMin: 61,
+      tempMax: 72,
+      icon: "rain",
+    },
+    {
+      date: "2025-10-18",
+      conditions: "Thunderstorms",
+      tempMin: 60,
+      tempMax: 70,
+      icon: "thunder",
+    },
+    {
+      date: "2025-10-19",
+      conditions: "Clear Night",
+      tempMin: 59,
+      tempMax: 73,
+      icon: "clear-night",
+    },
+    {
+      date: "2025-10-20",
+      conditions: "Partly Cloudy",
+      tempMin: 63,
+      tempMax: 78,
+      icon: "partly-cloudy-day",
+    },
+    {
+      date: "2025-10-21",
+      conditions: "Light Rain",
+      tempMin: 65,
+      tempMax: 74,
+      icon: "rain",
+    },
+  ],
+  description:
+    "Mild spring week with some humidity and a chance of rain midweek.",
+};
+//end of mock data
+
 const renderTodayForecast = (data) => {
   //Today's forecast card
   const city = document.querySelector(".location address p");
@@ -152,10 +228,16 @@ const initTempUnitToggle = () => {
     setCurrentSpeedUnit(newSpeedUnit);
 
     //Re render with new unit if we have data
-    if (formattedData) {
+    /* if (formattedData) {
       renderTodayForecast(formattedData);
       renderTodayDetails(formattedData);
       renderPredictions(formattedData);
+    } */
+
+    if (mockWeatherData) {
+      renderTodayForecast(mockWeatherData);
+      renderTodayDetails(mockWeatherData);
+      renderPredictions(mockWeatherData);
     }
   });
 };
@@ -203,4 +285,8 @@ export function initUI() {
       await handleSearch();
     }
   });
+
+  renderTodayForecast(mockWeatherData);
+  renderTodayDetails(mockWeatherData);
+  renderPredictions(mockWeatherData);
 }

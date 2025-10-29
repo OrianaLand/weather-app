@@ -1,3 +1,58 @@
+/* ---Light CSS Reset--- */
+html {
+    font-size: 16px;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+li,
+ul {
+    margin: 0;
+    padding: 0;
+    font-weight: normal;
+    list-style: none;
+}
+
+:root {
+    --bg-color-primary: #DEA193;
+    --bg-color-secondary: ;
+
+
+    --accent-color-primary: ;
+    --accent-color-secondary: ;
+
+    --text-color-primary: ;
+    --text-color-secondary: ;
+
+    --bg-hover-primary: ;
+    --bg-hover-secondary: ;
+    --bg-hover-select: ;
+
+    --delete-item-hover: ;
+
+    --form-btn-text-color: ;
+
+
+    --transition-default: all 0.2s ease;
+}
+
+body {
+    height: 100vh;
+    font-family: "Alata", sans-serif;
+    background-color: var(--bg-color-primary);
+}
 .today-forecast{
     background-color: aquamarine;
 }
@@ -8,4 +63,26 @@
 
 .week-predictions{
     background-color: lightsalmon;
+}
+
+.header{
+    display: flex;
+}
+
+.content{
+    display: flex;
+    flex-direction: column;
+    max-width: 95%;
+    margin: 0 auto;
+}
+.today-predictions{
+    
+}
+
+.predictions-list{
+    display: flex;
+}
+/* ------------- DESKTOP STYLES -------------*/
+@media only screen and (min-width: 780px){
+
 }
