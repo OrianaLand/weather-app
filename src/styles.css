@@ -141,6 +141,16 @@ input[type="search"]{
     border: none;
 }
 
+/* Override browser autocomplete styling */
+input[type="search"]:-webkit-autofill,
+input[type="search"]:-webkit-autofill:hover,
+input[type="search"]:-webkit-autofill:focus {
+    -webkit-text-fill-color: var(--gray-300);
+    -webkit-box-shadow: 0 0 0 1000px var(--gray-600) inset;
+    box-shadow: 0 0 0 1000px var(--gray-600) inset;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
 .temp-unit-toggle{
     padding: .5em 1em;
     width: 40px;
