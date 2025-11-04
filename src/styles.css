@@ -124,13 +124,6 @@ form{
     padding: .5em 1em;
 }
 
-
-.temp-unit-toggle, .search-btn{
-    background-color: var(--gray-500);
-    color: var(--gray-200);
-    border: none;
-    border-radius: .5em;
-}
  
 input[type="search"]{
     background: var(--gray-600);
@@ -154,6 +147,16 @@ input[type="search"]:-webkit-autofill:focus {
 .temp-unit-toggle{
     padding: .5em 1em;
     width: 40px;
+}
+
+.temp-unit-toggle,
+.search-btn {
+    background-color: var(--gray-500);
+    color: var(--gray-200);
+    font-weight: 600;
+    font-family: 'Quicksand';
+    border: none;
+    border-radius: .5em;
 }
 
 .content{
