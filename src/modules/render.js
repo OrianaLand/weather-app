@@ -211,7 +211,7 @@ const initTempUnitToggle = () => {
   }
 
   console.log("Initial temp unit:", getCurrentTempUnit());
-
+  toggleTempUnitBtn.textContent = `°${getCurrentTempUnit()}`;
   toggleTempUnitBtn.addEventListener("click", () => {
     //toggle temperature unit
     const newTempUnit =
@@ -219,6 +219,7 @@ const initTempUnitToggle = () => {
         ? TEMP_UNITS.CELSIUS
         : TEMP_UNITS.FAHRENHEIT;
     setCurrentTempUnit(newTempUnit);
+    toggleTempUnitBtn.textContent = `°${newTempUnit}`;
 
     //toggle speed unit
     const newSpeedUnit =
@@ -258,6 +259,12 @@ export function initUI() {
         alert("Please enter a city");
         return;
       }
+
+      // Show loading state
+      searchBtn.disabled = true;
+      searchBtn.textContent = "Loading...";
+      input.disabled = true;
+
       data = await getWeather(city);
       formattedData = formatWeatherData(data);
 
@@ -271,6 +278,11 @@ export function initUI() {
       console.log(error);
       console.error("Search error:", error);
       alert(`Failed to fetch weather data: ${error.message}`);
+    } finally {
+      // Reset button state
+      searchBtn.disabled = false;
+      searchBtn.textContent = "Search";
+      input.disabled = false;
     }
   };
 
