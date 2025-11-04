@@ -1,7 +1,16 @@
 import { TEMP_UNITS, SPEED_UNITS } from "./unitConverter.js";
+
 const formatDate = (date, tz) => {
   const options = { weekday: "long", month: "short", day: "numeric" };
-  const dateObj = new Date(date);
+  const dateObj = new Date(date + "T12:00:00");
+  /* const dateObj = new Date(date); */
+  console.log(date + tz);
+  console.log(
+    dateObj.toLocaleDateString("en-US", {
+      ...options,
+      timeZone: tz,
+    })
+  );
   return dateObj.toLocaleDateString("en-US", {
     ...options,
     timeZone: tz,
@@ -45,5 +54,7 @@ export function formatWeatherData(data) {
     description: data.description,
   };
 
+  console.log("data from Formater:");
+  console.log(formatedData);
   return formatedData;
 }

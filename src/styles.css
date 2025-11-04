@@ -210,12 +210,12 @@ address{
     font-size: var(--font-xs);
 }
 
-.today-details {
+.today-details, .week-predictions {
     background-color: var(--gray-800);
     padding: 1em 1.25em;
 }
 
-.details-title{
+.details-title, .predictions-title{
     color: var(--gray-400);
     padding: .5em 0 1.5em 0;
 }
@@ -248,9 +248,12 @@ address{
     font-weight: 700;
 }
 
-
 .week-predictions {
-    background-color: lightsalmon;
+    color: var(--gray-300);
+}
+
+.predictions-title, .day, .day-stats{
+    font-weight: 700;
 }
 
 .predictions-list{
