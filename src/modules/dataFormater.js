@@ -1,20 +1,14 @@
 import { TEMP_UNITS, SPEED_UNITS } from "./unitConverter.js";
+import { formatInTimeZone } from "date-fns-tz";
 
 const formatDate = (date, tz) => {
-  const options = { weekday: "long", month: "short", day: "numeric" };
-  const dateObj = new Date(date + "T12:00:00");
-  /* const dateObj = new Date(date); */
-  console.log(date + tz);
-  console.log(
-    dateObj.toLocaleDateString("en-US", {
-      ...options,
-      timeZone: tz,
-    })
-  );
-  return dateObj.toLocaleDateString("en-US", {
-    ...options,
-    timeZone: tz,
-  });
+  try {
+    // Format directly in the target timezone without intermediate conversion
+    return formatInTimeZone(date, tz, "EEEE, MMMM do");
+  } catch (error) {
+    console.error("Error formatting date:", error);
+    return "Invalid date";
+  }
 };
 
 const formatTime = (tz) => {
@@ -54,7 +48,5 @@ export function formatWeatherData(data) {
     description: data.description,
   };
 
-  console.log("data from Formater:");
-  console.log(formatedData);
   return formatedData;
 }
