@@ -198,8 +198,43 @@ address{
 }
 
 .today-details {
-    background-color: lightskyblue;
+    background-color: var(--gray-800);
+    padding: 1em 1.25em;
 }
+
+.details-title{
+    color: var(--gray-400);
+    padding: .5em 0 1.5em 0;
+}
+
+.detail-item:not(:first-child) {
+    border-top: 2px solid var(--gray-600);
+
+}
+
+.detail-item{
+    display: flex;
+    justify-content: space-between;
+    padding: 1em 0;
+}
+
+.detail-descriptor {
+    color: var(--gray-200);
+}
+
+.fa-solid, .fa-regular {
+    padding: 0 .75em 0 0.25em;
+    color: var(--gray-400);
+}
+
+.detail-value {
+    color: var(--gray-100);
+}
+
+.today-details, .details-title{
+    font-weight: 700;
+}
+
 
 .week-predictions {
     background-color: lightsalmon;
