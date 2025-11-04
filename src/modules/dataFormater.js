@@ -17,6 +17,10 @@ const formatTime = (tz) => {
   return now;
 };
 
+const formatDayOnly = (date, tz) => {
+  return formatInTimeZone(date, tz, "EEEE");
+};
+
 export function formatWeatherData(data) {
   const timeZone = data.timezone;
 
@@ -39,7 +43,7 @@ export function formatWeatherData(data) {
       rainProbability: data.current.rainProbability,
     },
     forecast: data.forecast.map((day) => ({
-      date: formatDate(day.date, timeZone),
+      date: formatDayOnly(day.date, timeZone),
       conditions: day.conditions,
       tempMin: day.tempMin,
       tempMax: day.tempMax,
