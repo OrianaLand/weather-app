@@ -37,11 +37,11 @@ export function setCurrentSpeedUnit(newSpeedUnit) {
 
 //helpers
 const fahrenheitToCelsius = (temp) => {
-  return Number((((temp - 32) * 5) / 9).toFixed(1));
+  return Math.round(((temp - 32) * 5) / 9);
 };
 
 const celsiusToFahrenheit = (temp) => {
-  return Number(((temp * 9) / 5 + 32).toFixed(1));
+  return Math.round((temp * 9) / 5 + 32);
 };
 
 const mileToKilometer = (speed) => {
@@ -55,7 +55,7 @@ const kilometerToMile = (speed) => {
 export function convertTemperature(temp, fromUnit, toUnit) {
   if (fromUnit === toUnit) {
     console.log("Same unit, no conversion needed");
-    return Number(temp).toFixed(1);
+    return Math.round(temp);
   }
 
   if (fromUnit === TEMP_UNITS.FAHRENHEIT && toUnit === TEMP_UNITS.CELSIUS) {
