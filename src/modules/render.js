@@ -187,15 +187,18 @@ const renderPredictions = (data) => {
     );
 
     const listItem = predictionList.children[i];
-
+    const dayText = day.date;
     // Day of week
-    listItem.querySelector(".day").textContent = day.date;
+    // Day of week - first 3 letters
+    listItem.querySelector(".day.start").textContent = dayText.substring(0, 3);
 
-    // Weather conditions
+    // Day of week - remaining letters
+    listItem.querySelector(".end").textContent = dayText.substring(3);
+    /* listItem.querySelector(".day").textContent = day.date; */
+
     // Weather conditions
     listItem.querySelector(".day-weather").textContent =
       day.conditions.split(",")[0];
-    /* listItem.querySelector(".day-weather").textContent = day.conditions; */
 
     // Min temperature
     listItem.querySelector(".min").textContent = formatTemperature(
