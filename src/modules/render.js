@@ -205,21 +205,6 @@ const renderPredictions = (data) => {
       tempMaxUI,
       currentTempUnit
     );
-
-    //Day
-    /*  predictionList.children[i].children[0].textContent = day.date;
-     */
-    //Conditions
-    /* predictionList.children[i].children[1].children[0].textContent =
-      day.conditions;
- */
-    //Temperature
-    /*  predictionList.children[
-      i
-    ].children[1].children[1].textContent = `${formatTemperature(
-      tempMinUI,
-      currentTempUnit
-    )} / ${formatTemperature(tempMaxUI, currentTempUnit)}`;*/
   }
 };
 
@@ -250,17 +235,17 @@ const initTempUnitToggle = () => {
     setCurrentSpeedUnit(newSpeedUnit);
 
     //Re render with new unit if we have data
-    /* if (formattedData) {
+    if (formattedData) {
       renderTodayForecast(formattedData);
       renderTodayDetails(formattedData);
       renderPredictions(formattedData);
-    } */
+    }
 
-    if (mockWeatherData) {
+    /* if (mockWeatherData) {
       renderTodayForecast(mockWeatherData);
       renderTodayDetails(mockWeatherData);
       renderPredictions(mockWeatherData);
-    }
+    } */
   });
 };
 
@@ -319,7 +304,11 @@ export function initUI() {
     }
   });
 
-  renderTodayForecast(mockWeatherData);
+  renderTodayForecast(formattedData);
+  renderTodayDetails(formattedData);
+  renderPredictions(formattedData);
+
+  /* renderTodayForecast(mockWeatherData);
   renderTodayDetails(mockWeatherData);
-  renderPredictions(mockWeatherData);
+  renderPredictions(mockWeatherData); */
 }
