@@ -197,8 +197,6 @@ const renderPredictions = (data) => {
     // Remaining letters in the nested .end span
     endElement.textContent = dayText.substring(3);
 
-    /* listItem.querySelector(".day").textContent = day.date; */
-
     // Weather conditions
     listItem.querySelector(".day-weather").textContent =
       day.conditions.split(",")[0];
@@ -313,9 +311,9 @@ export function initUI() {
     }
   });
 
-  renderTodayForecast(formattedData);
+  /* renderTodayForecast(formattedData);
   renderTodayDetails(formattedData);
-  renderPredictions(formattedData);
+  renderPredictions(formattedData); */
 
   /* renderTodayForecast(mockWeatherData);
   renderTodayDetails(mockWeatherData);
