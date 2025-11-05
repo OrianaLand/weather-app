@@ -154,7 +154,7 @@ input[type="search"]:-webkit-autofill:focus {
 .search-btn {
     background-color: var(--gray-500);
     color: var(--gray-200);
-    font-weight: 600;
+    font-weight: 700;
     font-family: 'Quicksand';
     border: none;
     border-radius: .5em;
