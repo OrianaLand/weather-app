@@ -52,6 +52,7 @@ body {
     background-attachment: fixed;
     display: flex;
     flex-direction: column;
+    margin: 0 1em;
 }
 
 .header{
@@ -166,7 +167,6 @@ input[type="search"]:-webkit-autofill:focus {
     max-width: 34rem;
     gap: .55em;
     align-self: center;
-    margin: 0 .65em;
     background-color: var(--gray-600);
     padding: .65em;
     border-radius: .5em;
