@@ -185,20 +185,41 @@ const renderPredictions = (data) => {
       data.sourceUnit,
       currentTempUnit
     );
+
+    const listItem = predictionList.children[i];
+
+    // Day of week
+    listItem.querySelector(".day").textContent = day.date;
+
+    // Weather conditions
+    listItem.querySelector(".day-weather").textContent = day.conditions;
+
+    // Min temperature
+    listItem.querySelector(".min").textContent = formatTemperature(
+      tempMinUI,
+      currentTempUnit
+    );
+
+    // Max temperature
+    listItem.querySelector(".max").textContent = formatTemperature(
+      tempMaxUI,
+      currentTempUnit
+    );
+
     //Day
-    predictionList.children[i].children[0].textContent = day.date;
-
+    /*  predictionList.children[i].children[0].textContent = day.date;
+     */
     //Conditions
-    predictionList.children[i].children[1].children[0].textContent =
+    /* predictionList.children[i].children[1].children[0].textContent =
       day.conditions;
-
+ */
     //Temperature
-    predictionList.children[
+    /*  predictionList.children[
       i
     ].children[1].children[1].textContent = `${formatTemperature(
       tempMinUI,
       currentTempUnit
-    )} / ${formatTemperature(tempMaxUI, currentTempUnit)}`;
+    )} / ${formatTemperature(tempMaxUI, currentTempUnit)}`;*/
   }
 };
 

@@ -162,6 +162,7 @@ input[type="search"]:-webkit-autofill:focus {
 .content{
     display: flex;
     flex-direction: column;
+    width: 100%;
     max-width: 34rem;
     gap: .55em;
     align-self: center;
@@ -258,6 +259,39 @@ address{
 
 .predictions-list{
     display: flex;
+    text-align: center;
+    gap: 8px;
+    justify-content: space-between;
+}
+
+.prediction-item{
+    display: flex;
+    flex-direction: column;
+    min-height: 8em;
+    justify-content: space-between;
+}
+
+.min{
+    color: var(--gray-300);
+}
+
+.max{
+    color: var(--gray-100);
+}
+
+.min, .max{
+    display: block;
+}
+
+.slash, .day-weather{
+    display: none;
+}
+
+.day-temp-range{
+    display: block;
+}
+.day-weather,.day-temp-range{
+   font-size: var(--font-xs); 
 }
 
 .today-forecast, .today-details, .week-predictions{
