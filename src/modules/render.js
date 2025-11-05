@@ -192,7 +192,10 @@ const renderPredictions = (data) => {
     listItem.querySelector(".day").textContent = day.date;
 
     // Weather conditions
-    listItem.querySelector(".day-weather").textContent = day.conditions;
+    // Weather conditions
+    listItem.querySelector(".day-weather").textContent =
+      day.conditions.split(",")[0];
+    /* listItem.querySelector(".day-weather").textContent = day.conditions; */
 
     // Min temperature
     listItem.querySelector(".min").textContent = formatTemperature(
