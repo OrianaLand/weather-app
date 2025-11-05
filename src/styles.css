@@ -315,6 +315,7 @@ address>p, .time>time, .weather-conditions {
         align-items: center;
         justify-content: center;
         position: relative;
+        margin: 1.5em 0 2em 0;
     }
 
     .icon-title{
@@ -322,5 +323,43 @@ address>p, .time>time, .weather-conditions {
         left: 0;
     }
 
+    .content{
+        display: grid;
+        grid-template-columns: 1.015fr 1fr;
+        grid-template-rows: 1.2fr 1fr;
+        max-width: 75%;
+        padding: 1.5em;
+        gap: 1.5em;
+    }
+
+    .today-forecast{
+        grid-row: 1/-1;
+        height: 100%;
+    }
+
+    .predictions-list {
+       
+        justify-content: space-around;
+    }
+
+    .prediction-item {
+        min-height: 12rem;
+        flex: 1;
+    }
+
+    .day-stats{
+        display: grid;
+        gap: .25em;
+        height: 5.75em;
+        align-content: space-between;
+    }
+
+    .day-temp-range{
+        align-self: end;
+    }
+
+    .day-weather{
+        display: block;
+    }
 
 }
