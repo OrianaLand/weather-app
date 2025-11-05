@@ -121,7 +121,6 @@ const renderTodayForecast = (data) => {
     currentTempUnit
   );
 
-  city.textContent = data.location;
   city.textContent = data.location
     .split(" ")
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
