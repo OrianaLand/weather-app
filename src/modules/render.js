@@ -188,12 +188,13 @@ const renderPredictions = (data) => {
 
     const listItem = predictionList.children[i];
     const dayText = day.date;
-    // Day of week
+
     // Day of week - first 3 letters
     listItem.querySelector(".day.start").textContent = dayText.substring(0, 3);
 
     // Day of week - remaining letters
     listItem.querySelector(".end").textContent = dayText.substring(3);
+
     /* listItem.querySelector(".day").textContent = day.date; */
 
     // Weather conditions

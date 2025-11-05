@@ -18,7 +18,7 @@ const formatTime = (tz) => {
 };
 
 const formatDayOnly = (date, tz) => {
-  return formatInTimeZone(date, tz, "EEE");
+  return formatInTimeZone(date, tz, "EEEE");
 };
 
 export function formatWeatherData(data) {
