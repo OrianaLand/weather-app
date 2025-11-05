@@ -261,7 +261,7 @@ address{
     display: flex;
     text-align: center;
     gap: 8px;
-    justify-content: space-between;
+    justify-content: space-around;
 }
 
 .prediction-item{

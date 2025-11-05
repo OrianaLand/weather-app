@@ -122,6 +122,11 @@ const renderTodayForecast = (data) => {
   );
 
   city.textContent = data.location;
+  city.textContent = data.location
+    .split(" ")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
+
   date.textContent = data.current.date;
   time.textContent = data.current.time;
   temperature.textContent = formatTemperature(tempUI, currentTempUnit);
