@@ -188,12 +188,14 @@ const renderPredictions = (data) => {
 
     const listItem = predictionList.children[i];
     const dayText = day.date;
+    const startElement = listItem.querySelector(".day.start");
+    const endElement = startElement.querySelector(".end"); // Select .end from within .start
 
-    // Day of week - first 3 letters
-    listItem.querySelector(".day.start").textContent = dayText.substring(0, 3);
+    // Day of week - replace first child node, which is a text node, with first 3 letters
+    startElement.childNodes[0].textContent = dayText.substring(0, 3);
 
-    // Day of week - remaining letters
-    listItem.querySelector(".end").textContent = dayText.substring(3);
+    // Remaining letters in the nested .end span
+    endElement.textContent = dayText.substring(3);
 
     /* listItem.querySelector(".day").textContent = day.date; */
 
