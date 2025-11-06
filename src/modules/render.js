@@ -13,6 +13,7 @@ import {
   formatTemperature,
   formatSpeed,
 } from "./unitConverter.js";
+import defaultIcon from "../assets/default-icon.svg";
 
 //Store formatted data for units conversion
 let formattedData = null;
@@ -134,18 +135,24 @@ const renderTodayForecast = (data) => {
   tempRanges.textContent = `${formatTemperature(tempMinUI, currentTempUnit)} 
   / ${formatTemperature(tempMaxUI, currentTempUnit)}`;
   conditions.textContent = data.current.conditions;
-  icon.src = getWeatherIconURL(data.current.icon);
+
+  // In renderTodayForecast function, temporarily use a data URL or external SVG:
+  if (data && data.current && data.current.icon) {
+    icon.src = getWeatherIconURL(data.current.icon);
+  } else {
+    // Temporary test - use a simple SVG data URL
+    icon.src =
+      "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMTIiIGN5PSIxMiIgcj0iMTAiIGZpbGw9IiMzMzMiLz4KPC9zdmc+";
+    // Or use an external SVG for testing:
+    // icon.src = "https://via.placeholder.com/64x64/333/fff?text=ICON";
+  }
 
   if (data.isDay) {
-    console.log(data.isDay);
     card.classList.remove("is-night");
     card.classList.add("is-day");
-    console.log(card);
   } else {
-    console.log(data.isDay);
     card.classList.add("is-night");
     card.classList.remove("is-day");
-    console.log(card);
   }
 };
 

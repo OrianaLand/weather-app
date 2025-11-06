@@ -8,6 +8,7 @@ export default {
     filename: "main.js",
     path: path.resolve("./dist"),
     clean: true,
+    assetModuleFilename: "assets/[hash][ext][query]", // This helps with path resolution
   },
   devtool: "eval-source-map",
   devServer: {
@@ -32,6 +33,17 @@ export default {
       {
         test: /\.css$/i,
         use: ["style-loader", "css-loader"],
+      },
+      {
+        test: /\.svg$/i,
+        type: "asset/resource",
+        generator: {
+          filename: "assets/[name][ext]", // This will preserve the original name
+        },
+      },
+      {
+        test: /\.(png|jpg|jpeg|gif)$/i,
+        type: "asset/resource",
       },
     ],
   },
