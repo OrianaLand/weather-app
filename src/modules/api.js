@@ -33,6 +33,11 @@ const parseWeatherData = (data) => {
     timezone: data.timezone,
   };
 };
+export function getWeatherIconURL(iconName) {
+  const baseURL =
+    "https://raw.githubusercontent.com/visualcrossing/WeatherIcons/main/SVG/2nd%20Set%20-%20Color";
+  return `${baseURL}/${iconName}.svg`;
+}
 
 export async function getWeather(city) {
   try {

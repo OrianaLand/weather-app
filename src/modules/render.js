@@ -1,4 +1,4 @@
-import { getWeather } from "./api.js";
+import { getWeather, getWeatherIconURL } from "./api.js";
 import { formatWeatherData } from "./dataFormater.js";
 import {
   TEMP_UNITS,
@@ -92,7 +92,11 @@ const mockWeatherData = {
     "Mild spring week with some humidity and a chance of rain midweek.",
 };
 //end of mock data
-
+/* const getWeatherIconURL = (iconName) => {
+  const baseURL =
+    "https://raw.githubusercontent.com/visualcrossing/WeatherIcons/main/SVG/2nd%20Set%20-%20Color";
+  return `${baseURL}/${iconName}.svg`;
+}; */
 const renderTodayForecast = (data) => {
   //Today's forecast card
   const city = document.querySelector(".location address p");
@@ -101,6 +105,7 @@ const renderTodayForecast = (data) => {
   const temperature = document.querySelector(".current-temp");
   const tempRanges = document.querySelector(".ranges-temp");
   const conditions = document.querySelector(".weather-conditions");
+  const icon = document.querySelector(".today-icon");
 
   const currentTempUnit = getCurrentTempUnit();
 
@@ -132,6 +137,7 @@ const renderTodayForecast = (data) => {
   tempRanges.textContent = `${formatTemperature(tempMinUI, currentTempUnit)} 
   / ${formatTemperature(tempMaxUI, currentTempUnit)}`;
   conditions.textContent = data.current.conditions;
+  icon.src = getWeatherIconURL(data.current.icon);
 };
 
 const renderTodayDetails = (data) => {

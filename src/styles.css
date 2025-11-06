@@ -39,7 +39,7 @@ ul {
 
     --font-xs: calc(11px + 0.15vw);
     --font-small: calc(12px + 0.5vw);
-    --font-xl: calc(16px + 1.25vw);
+    --font-xl: calc(16px + 2.75vw);
     
 
     --transition-default: all 0.2s ease;
@@ -175,11 +175,11 @@ input[type="search"]:-webkit-autofill:focus {
 
 .today-forecast {
     background-color: var(--gray-500);
-    height: 15em;
+    height: 20em;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: 1em 1.25em;
+    padding: 1.5em 1.75em;
 }
 
 address{
@@ -196,10 +196,21 @@ address{
     font-size: var(--font-xs);
 }
 
-.weather-info{
+.weather-details{
     display: flex;
     flex-direction: column;
     color: var(--gray-100);
+}
+
+.weather-icon{
+    position: relative;
+}
+
+.today-icon{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 8.5em;
 }
 
 .current-temp{
@@ -336,8 +347,12 @@ address>p, .time>time, .weather-conditions {
     .today-forecast{
         grid-row: 1/-1;
         height: 100%;
+        padding: 2.5em 2em;
     }
 
+    .today-icon{
+        width: 10.5em;
+    }
     .predictions-list {
         gap: 0;
         justify-content: space-around;
