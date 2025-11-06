@@ -293,6 +293,7 @@ export function initUI() {
 
   const searchBtn = document.querySelector(".search-btn");
   const input = document.querySelector(".search-input");
+  const logo = document.querySelector(".icon-title");
 
   let data = {};
 
@@ -333,13 +334,19 @@ export function initUI() {
   searchBtn.addEventListener("click", async (e) => {
     e.preventDefault();
     await handleSearch();
+    input.value = "";
   });
 
   input.addEventListener("keypress", async (e) => {
     if (e.key === "Enter") {
       e.preventDefault();
       await handleSearch();
+      input.value = "";
     }
+  });
+
+  logo.addEventListener("click", () => {
+    window.location.reload();
   });
 
   /* renderTodayForecast(formattedData);

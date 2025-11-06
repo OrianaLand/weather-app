@@ -66,6 +66,11 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-bottom: .5em;
+}
+
+.icon-title:hover{
+    cursor: pointer;
 }
 
 .icon-title svg{
@@ -270,10 +275,15 @@ address{
 
 .week-predictions {
     color: var(--gray-300);
+    background-color: var(--gray-500);
 }
 
 .predictions-title, .day, .day-stats{
     font-weight: 700;
+}
+
+.predictions-title{
+    color: var(--gray-100);
 }
 
 .predictions-list{
@@ -344,7 +354,8 @@ address>p, .time>time, .weather-conditions {
 
     .icon-title{
         position: absolute;
-        left: 0;
+        left: 6px;
+        margin-bottom: unset;
     }
 
     .content{
