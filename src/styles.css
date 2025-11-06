@@ -182,6 +182,14 @@ input[type="search"]:-webkit-autofill:focus {
     padding: 1.5em 1.75em;
 }
 
+.is-day{
+    background: url(assets/daytime-bg.png) center/cover no-repeat;
+}
+
+.is-night{
+    background: url(assets/nighttime-bg.png) center/cover no-repeat;
+}
+
 address{
     font-style: normal;
 }

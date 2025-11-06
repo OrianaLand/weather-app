@@ -21,8 +21,17 @@ const formatDayOnly = (date, tz) => {
   return formatInTimeZone(date, tz, "EEEE");
 };
 
+const isDayTime = (currentTimeEpoch, sunriseEpoch, sunsetEpoch) => {
+  console.log("inside isDayTime");
+  console.log(currentTimeEpoch);
+  console.log(sunriseEpoch);
+  console.log(sunsetEpoch);
+  return currentTimeEpoch >= sunriseEpoch && currentTimeEpoch < sunsetEpoch;
+};
+
 export function formatWeatherData(data) {
   const timeZone = data.timezone;
+  const currentDate = data.current.date;
 
   const formatedData = {
     location: data.location,
@@ -42,6 +51,11 @@ export function formatWeatherData(data) {
       uvIndex: data.current.uvIndex,
       rainProbability: data.current.rainProbability,
     },
+    isDay: isDayTime(
+      data.current.currentEpoch,
+      data.current.sunriseEpoch,
+      data.current.sunsetEpoch
+    ),
     forecast: data.forecast.map((day) => ({
       date: formatDayOnly(day.date, timeZone),
       conditions: day.conditions,
@@ -51,6 +65,5 @@ export function formatWeatherData(data) {
     })),
     description: data.description,
   };
-
   return formatedData;
 }
