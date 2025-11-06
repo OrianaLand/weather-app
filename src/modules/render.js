@@ -136,15 +136,11 @@ const renderTodayForecast = (data) => {
   / ${formatTemperature(tempMaxUI, currentTempUnit)}`;
   conditions.textContent = data.current.conditions;
 
-  // In renderTodayForecast function, temporarily use a data URL or external SVG:
   if (data && data.current && data.current.icon) {
     icon.src = getWeatherIconURL(data.current.icon);
   } else {
-    // Temporary test - use a simple SVG data URL
     icon.src =
       "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMTIiIGN5PSIxMiIgcj0iMTAiIGZpbGw9IiMzMzMiLz4KPC9zdmc+";
-    // Or use an external SVG for testing:
-    // icon.src = "https://via.placeholder.com/64x64/333/fff?text=ICON";
   }
 
   if (data.isDay) {
@@ -222,6 +218,15 @@ const renderPredictions = (data) => {
 
     // Remaining letters in the nested .end span
     endElement.textContent = dayText.substring(3);
+
+    //Icon
+    if (day && day.icon) {
+      listItem.querySelector(".weekly-icon").src = getWeatherIconURL(day.icon);
+    } else {
+      // Temporary test - use a simple SVG data URL
+      listItem.querySelector(".weekly-icon").src =
+        "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMTIiIGN5PSIxMiIgcj0iMTAiIGZpbGw9IiMzMzMiLz4KPC9zdmc+";
+    }
 
     // Weather conditions
     listItem.querySelector(".day-weather").textContent =
