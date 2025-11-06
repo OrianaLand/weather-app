@@ -288,6 +288,11 @@ address{
     flex-direction: column;
     min-height: 8em;
     justify-content: space-between;
+    align-items: center;
+}
+
+.weekly-icon{
+    width: 3.5em;
 }
 
 .min{
