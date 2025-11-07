@@ -380,8 +380,13 @@ address>p, .time>time, .weather-conditions {
     .predictions-list {
         gap: 0;
         justify-content: space-around;
+        padding: 1em 0;
     }
 
+    .prediction-item:not(:last-child){
+        border-right: 2px solid var(--gray-600);
+    }
+    
     .prediction-item {
         min-height: 12rem;
         flex: 1;
