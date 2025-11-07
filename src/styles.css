@@ -42,7 +42,7 @@ ul {
     --font-xl: calc(16px + 2.75vw);
     
 
-    --transition-default: all 0.2s ease;
+    --transition-default: all 0.3s ease;
 }
 
 body {
@@ -128,6 +128,16 @@ form{
     top: 50%;
     transform: translateY(-50%);
     padding: .5em 1em;
+    transition: var(--transition-default);
+}
+
+.search-btn:disabled{
+    background-color: var(--gray-500);
+}
+
+.search-btn:hover, .temp-unit-toggle:hover{
+    background-color: var(--light-blue);
+    color: var(--gray-700);
 }
 
  
@@ -354,7 +364,7 @@ address>p, .time>time, .weather-conditions {
 
     .icon-title{
         position: absolute;
-        left: 6px;
+        left: 10px;
         margin-bottom: unset;
     }
 
@@ -386,7 +396,7 @@ address>p, .time>time, .weather-conditions {
     .prediction-item:not(:last-child){
         border-right: 2px solid var(--gray-600);
     }
-    
+
     .prediction-item {
         min-height: 12rem;
         flex: 1;
