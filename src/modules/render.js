@@ -13,6 +13,15 @@ import {
   formatTemperature,
   formatSpeed,
 } from "./unitConverter.js";
+import {
+  saveCity,
+  saveTempUnit,
+  saveSpeedUnit,
+  getLastSearchedCity,
+  getSavedTempUnit,
+  getSavedSpeedUnit,
+  clearAllData,
+} from "./storage.js";
 import defaultIcon from "../assets/default-icon.svg";
 
 //Store formatted data for units conversion
@@ -254,23 +263,38 @@ const initTempUnitToggle = () => {
     return;
   }
 
+  //Check for saved data on local Storage
+  const savedTempUnitLS = getSavedTempUnit();
+  const savedSpeedUnitLS = getSavedSpeedUnit();
+
+  if (savedTempUnitLS) {
+    setCurrentTempUnit(savedTempUnitLS);
+  }
+
+  if (savedSpeedUnitLS) {
+    setCurrentSpeedUnit(savedSpeedUnitLS);
+  }
+
   console.log("Initial temp unit:", getCurrentTempUnit());
   toggleTempUnitBtn.textContent = `°${getCurrentTempUnit()}`;
+
   toggleTempUnitBtn.addEventListener("click", () => {
-    //toggle temperature unit
+    //toggle temperatur and save in local storagee unit
     const newTempUnit =
       getCurrentTempUnit() === TEMP_UNITS.FAHRENHEIT
         ? TEMP_UNITS.CELSIUS
         : TEMP_UNITS.FAHRENHEIT;
     setCurrentTempUnit(newTempUnit);
+    saveTempUnit(newTempUnit);
     toggleTempUnitBtn.textContent = `°${newTempUnit}`;
 
-    //toggle speed unit
+    //toggle speed unit and save in local storage
     const newSpeedUnit =
       getCurrentSpeedUnit() === SPEED_UNITS.MILE
         ? SPEED_UNITS.KILOMETER
         : SPEED_UNITS.MILE;
     setCurrentSpeedUnit(newSpeedUnit);
+    saveSpeedUnit(newSpeedUnit);
 
     //Re render with new unit if we have data
     if (formattedData) {
@@ -287,6 +311,31 @@ const initTempUnitToggle = () => {
   });
 };
 
+//helper functions for content visibility management
+const showContent = () => {
+  const intro = document.querySelector(".intro");
+  const content = document.querySelector(".content");
+
+  if (intro && content) {
+    intro.classList.add("hidden");
+    content.classList.add("visible");
+  }
+};
+
+const hideContent = () => {
+  const intro = document.querySelector(".intro");
+  const content = document.querySelector(".content");
+
+  if (intro && content) {
+    /* intro.classList.remove("hidden"); */
+    content.classList.remove("visible");
+
+    setTimeout(() => {
+      intro.classList.remove("hidden");
+    }, 300); // Match the CSS transition time
+  }
+};
+
 export function initUI() {
   // Initialize the temperature unit toggle
   initTempUnitToggle();
@@ -296,6 +345,18 @@ export function initUI() {
   const logo = document.querySelector(".icon-title");
 
   let data = {};
+
+  //Check for data on local storage
+  const savedCityLS = getLastSearchedCity();
+  console.log(savedCityLS); //this is logging the temp C/F so ERROR
+  if (savedCityLS) {
+    //Auto-load the saved city
+    input.value = savedCityLS;
+    setTimeout(() => {
+      handleSearch();
+      input.value = "";
+    }, 10);
+  }
 
   const handleSearch = async () => {
     try {
@@ -317,6 +378,12 @@ export function initUI() {
       renderTodayForecast(formattedData);
       renderTodayDetails(formattedData);
       renderPredictions(formattedData);
+
+      // Show content and hide intro
+      showContent();
+
+      //Save to local Storage
+      saveCity(city);
 
       console.log(data);
     } catch (error) {
@@ -346,7 +413,10 @@ export function initUI() {
   });
 
   logo.addEventListener("click", () => {
-    window.location.reload();
+    hideContent();
+    clearAllData();
+    input.value = "";
+    /* window.location.reload(); */
   });
 
   /* renderTodayForecast(formattedData);

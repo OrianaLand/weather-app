@@ -53,6 +53,8 @@ body {
     display: flex;
     flex-direction: column;
     margin: 0 1em;
+
+    position: relative;
 }
 
 .header{
@@ -175,6 +177,46 @@ input[type="search"]:-webkit-autofill:focus {
     border-radius: .5em;
 }
 
+.intro {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 55vh;
+    text-align: center;
+    margin: 0 auto;
+    opacity: 1;
+    position: relative;
+    transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out, transform 0s ease-in-out;
+}
+
+.welcome{
+    color: var(--gray-100);
+    font-weight: 600;
+}
+
+.welcome>span{
+    color: var(--light-blue);
+}
+
+.intro>p{
+    padding-top: 1em;
+    color: var(--gray-300)
+}
+
+.hidden {
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
+    height: 0;
+    overflow: hidden;
+    position: absolute;
+    top: 50%;
+    right: 50%;
+    transform: translate(50%, -50%);
+    transform: scale(0.2);
+}
+
 .content{
     display: flex;
     flex-direction: column;
@@ -183,9 +225,23 @@ input[type="search"]:-webkit-autofill:focus {
     gap: .55em;
     align-self: center;
     background-color: var(--gray-600);
-    padding: .65em;
+    padding: 0;
     border-radius: .5em;
     
+    visibility: hidden;
+    opacity: 0;
+    overflow: hidden;
+    height: 0;
+    transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+}
+
+.visible {
+    padding: .65em;
+    height: auto;
+    overflow: visible;
+    opacity: 1;
+    position: relative;
+    visibility: visible ;
 }
 
 .today-forecast {
@@ -368,14 +424,24 @@ address>p, .time>time, .weather-conditions {
         margin-bottom: unset;
     }
 
+    
+
     .content{
         display: grid;
         grid-template-columns: 1.015fr 1fr;
         grid-template-rows: 1.2fr 1fr;
-        padding: 1.25em;
+        padding: 1.0;
         gap: 1.25em;
         max-width: unset;
         width: min(100%, 82rem);
+
+        position: absolute;
+        transform: translateY(1vh);
+    }
+
+    .visible{
+        padding: 1.25em;
+        position: relative;
     }
 
     .today-forecast{
