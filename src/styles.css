@@ -41,8 +41,6 @@ ul {
     --font-small: calc(12px + 0.5vw);
     --font-xl: calc(16px + 2.75vw);
     
-
-    --transition-default: all 0.3s ease;
 }
 
 body {
@@ -415,16 +413,14 @@ address>p, .time>time, .weather-conditions {
         align-items: center;
         justify-content: center;
         position: relative;
-        margin: 1.5em 0 2em 0;
+        margin: 1.5em auto 2em auto;
     }
 
     .icon-title{
         position: absolute;
-        left: 10px;
+        left: -15px;
         margin-bottom: unset;
-    }
-
-    
+    }  
 
     .content{
         display: grid;
