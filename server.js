@@ -41,9 +41,18 @@ app.get("/api/weather", async (req, res) => {
   }
 });
 
-// Serve index.html for all other routes (SPA support)
-app.get("/*", (req, res) => {
+// Serve index.html for root route
+app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "dist", "index.html"));
+});
+
+// For SPA routing, serve index.html for all other GET requests
+app.get("*", (req, res, next) => {
+  if (req.method === "GET" && !req.path.startsWith("/api/")) {
+    res.sendFile(path.join(__dirname, "dist", "index.html"));
+  } else {
+    next();
+  }
 });
 
 app.listen(PORT, () => {
