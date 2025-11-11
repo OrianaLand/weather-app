@@ -1,6 +1,7 @@
 /* ---Light CSS Reset--- */
 html {
     font-size: 16px;
+    height: 100%;
 }
 
 *,
@@ -18,11 +19,13 @@ h5,
 h6,
 p,
 li,
-ul {
+ul,
+a {
     margin: 0;
     padding: 0;
     font-weight: normal;
     list-style: none;
+    text-decoration: none;
 }
 
 :root {
@@ -44,14 +47,14 @@ ul {
 }
 
 body {
-    height: 100%;
+    min-height: 100vh;
     font-family: "Quicksand", sans-serif;
     background: url(assets/Background.png) center/cover no-repeat;
     background-attachment: fixed;
     display: flex;
     flex-direction: column;
     margin: 0 1em;
-
+    justify-content: space-between;
     position: relative;
 }
 
@@ -242,6 +245,18 @@ input[type="search"]:-webkit-autofill:focus {
     visibility: visible ;
 }
 
+footer {
+    text-align: center;
+    padding: 1em 0;
+    color: var(--gray-300);
+    margin-top: auto;
+    width: 100%;
+}
+
+.oriana{
+    color: var(--light-blue);
+}
+
 .today-forecast {
     background-color: var(--gray-500);
     height: 20em;
@@ -426,7 +441,7 @@ address>p, .time>time, .weather-conditions {
         display: grid;
         grid-template-columns: 1.015fr 1fr;
         grid-template-rows: 1.2fr 1fr;
-        padding: 1.0;
+        padding: 1em;
         gap: 1.25em;
         max-width: unset;
         width: min(100%, 82rem);
