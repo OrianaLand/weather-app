@@ -85,7 +85,7 @@ This project was an excellent opportunity to:
 - Develop error handling and user feedback systems
 - Optimize assets and bundle with Webpack for production
 
-## Screenshots & Gifs
+## Screenshots
 
 ### Desktop & Mobile View
 
