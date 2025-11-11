@@ -162,6 +162,6 @@ This project is open source and available under the ISC License.
 
 ## Contact
 
-Oriana - inkedin.com/in/oriana-landaeta - landaetaoriana@gmail.com
+Oriana - linkedin.com/in/oriana-landaeta - landaetaoriana@gmail.com
 
 Project Link: https://github.com/OrianaLand/weather-app
