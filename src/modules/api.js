@@ -44,7 +44,15 @@ export function getWeatherIconURL(iconName) {
 
 export async function getWeather(city) {
   try {
-    const response = await fetch(`/api/weather?q=${encodeURIComponent(city)}`);
+    // Use relative path for production, full URL for development
+    const baseURL =
+      window.location.hostname === "localhost"
+        ? "http://localhost:3000"
+        : "https://weather-app-fle3.onrender.com";
+
+    const response = await fetch(
+      `${baseURL}/api/weather?q=${encodeURIComponent(city)}`
+    );
 
     if (!response.ok) {
       throw new Error("Network response was not ok");
@@ -57,4 +65,18 @@ export async function getWeather(city) {
   } catch (error) {
     throw error;
   }
+  /*   try {
+    const response = await fetch(`/api/weather?q=${encodeURIComponent(city)}`);
+
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+
+    const data = await parseResponse(response);
+    const parsedData = parseWeatherData(data);
+
+    return parsedData;
+  } catch (error) {
+    throw error;
+  } */
 }

@@ -1,6 +1,11 @@
 import express from "express";
 import dotenv from "dotenv";
-import fetch from "node-fetch"; // or remove if using Node 18+ (we have Node 22, so we can use global fetch)
+import fetch from "node-fetch";
+import path from "path";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 dotenv.config();
 
@@ -10,11 +15,10 @@ const API_KEY = process.env.WEATHER_API_KEY;
 const BASE_URL =
   "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/";
 
-if (!API_KEY) {
-  console.error("ERROR: WEATHER_API_KEY is not set in .env");
-  process.exit(1);
-}
+// Serve static files from dist directory
+app.use(express.static(path.join(__dirname, "dist")));
 
+// API route
 app.get("/api/weather", async (req, res) => {
   try {
     const { q } = req.query;
@@ -35,6 +39,11 @@ app.get("/api/weather", async (req, res) => {
     console.error(error);
     res.status(500).json({ error: "Server error" });
   }
+});
+
+// Serve index.html for all other routes (SPA support)
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "dist", "index.html"));
 });
 
 app.listen(PORT, () => {
