@@ -15,10 +15,7 @@ const API_KEY = process.env.WEATHER_API_KEY;
 const BASE_URL =
   "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/";
 
-// Serve static files from dist directory
-app.use(express.static(path.join(__dirname, "dist")));
-
-// API route
+// API route - MUST come before static files
 app.get("/api/weather", async (req, res) => {
   try {
     const { q } = req.query;
@@ -41,9 +38,11 @@ app.get("/api/weather", async (req, res) => {
   }
 });
 
-// For SPA routing, serve index.html for all other GET requests
-// Changed from "*" to catch-all that works with Express v5+
-app.get("/*", (req, res) => {
+// Serve static files from dist directory
+app.use(express.static(path.join(__dirname, "dist")));
+
+// SPA fallback - serve index.html for any other requests
+app.use((req, res) => {
   res.sendFile(path.join(__dirname, "dist", "index.html"));
 });
 
