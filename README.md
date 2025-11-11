@@ -87,17 +87,9 @@ This project was an excellent opportunity to:
 
 ## Screenshots & Gifs
 
-### Desktop View
+### Desktop & Mobile View
 
-![Desktop View](./screenshot-big-screen-intro.png)
-
-![Desktop View](./screenshot-big-screen.png)
-
-### Mobile View
-
-![Mobile View](./screenshot-small-screen-intro.png)
-
-![Mobile View](./screenshot-small-screen.jpg)
+![Desktop & Mobile View](./deskstop-mobile-preview.png)
 
 ## Usage
 
