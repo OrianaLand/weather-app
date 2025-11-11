@@ -228,7 +228,6 @@ input[type="search"]:-webkit-autofill:focus {
     background-color: var(--gray-600);
     padding: 0;
     border-radius: .5em;
-    
     visibility: hidden;
     opacity: 0;
     overflow: hidden;
@@ -403,6 +402,7 @@ address{
 .day-temp-range{
     display: block;
 }
+
 .day-weather,.day-temp-range{
    font-size: var(--font-xs); 
 }
@@ -445,7 +445,6 @@ address>p, .time>time, .weather-conditions {
         gap: 1.25em;
         max-width: unset;
         width: min(100%, 82rem);
-
         position: absolute;
         transform: translateY(1vh);
     }
@@ -464,6 +463,7 @@ address>p, .time>time, .weather-conditions {
     .today-icon{
         width: 10.5em;
     }
+    
     .predictions-list {
         gap: 0;
         justify-content: space-around;

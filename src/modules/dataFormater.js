@@ -22,10 +22,6 @@ const formatDayOnly = (date, tz) => {
 };
 
 const isDayTime = (currentTimeEpoch, sunriseEpoch, sunsetEpoch) => {
-  console.log("inside isDayTime");
-  console.log(currentTimeEpoch);
-  console.log(sunriseEpoch);
-  console.log(sunsetEpoch);
   return currentTimeEpoch >= sunriseEpoch && currentTimeEpoch < sunsetEpoch;
 };
 

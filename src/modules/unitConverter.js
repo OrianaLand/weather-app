@@ -16,6 +16,7 @@ let currentSpeedUnit = SPEED_UNITS.MILE;
 export function getCurrentTempUnit() {
   return currentTempUnit;
 }
+
 export function getCurrentSpeedUnit() {
   return currentSpeedUnit;
 }
@@ -29,6 +30,7 @@ export function setCurrentTempUnit(newTempUnit) {
     currentTempUnit = newTempUnit;
   }
 }
+
 export function setCurrentSpeedUnit(newSpeedUnit) {
   if (Object.values(SPEED_UNITS).includes(newSpeedUnit)) {
     currentSpeedUnit = newSpeedUnit;
@@ -54,17 +56,14 @@ const kilometerToMile = (speed) => {
 //converters
 export function convertTemperature(temp, fromUnit, toUnit) {
   if (fromUnit === toUnit) {
-    console.log("Same unit, no conversion needed");
     return Math.round(temp);
   }
 
   if (fromUnit === TEMP_UNITS.FAHRENHEIT && toUnit === TEMP_UNITS.CELSIUS) {
-    console.log(temp + "convert from F to C");
     return fahrenheitToCelsius(temp);
   }
 
   if (fromUnit === TEMP_UNITS.CELSIUS && toUnit === TEMP_UNITS.FAHRENHEIT) {
-    console.log(temp + "convert from C to F");
     return celsiusToFahrenheit(temp);
   }
   return Number(temp).toFixed(1);
@@ -72,17 +71,14 @@ export function convertTemperature(temp, fromUnit, toUnit) {
 
 export function convertSpeed(speed, fromUnit, toUnit) {
   if (fromUnit === toUnit) {
-    console.log("Same unit, no conversion needed");
     return Number(speed).toFixed(1);
   }
 
   if (fromUnit === SPEED_UNITS.MILE && toUnit === SPEED_UNITS.KILOMETER) {
-    console.log(speed + "convert from F to C");
     return mileToKilometer(speed);
   }
 
   if (fromUnit === SPEED_UNITS.KILOMETER && toUnit === SPEED_UNITS.MILE) {
-    console.log(speed + "convert from C to F");
     return kilometerToMile(speed);
   }
   return Number(speed).toFixed(1);

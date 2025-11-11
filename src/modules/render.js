@@ -1,4 +1,3 @@
-import { ca } from "date-fns/locale";
 import { getWeather, getWeatherIconURL } from "./api.js";
 import { formatWeatherData } from "./dataFormater.js";
 import {
@@ -22,11 +21,11 @@ import {
   getSavedSpeedUnit,
   clearAllData,
 } from "./storage.js";
+//used in HTML as default icon
 import defaultIcon from "../assets/default-icon.svg";
 
 //Store formatted data for units conversion
 let formattedData = null;
-let tempUnitUI = getCurrentTempUnit();
 
 //mock data to avoid unnecesary API calls
 const mockWeatherData = {
@@ -121,7 +120,6 @@ const renderTodayForecast = (data) => {
     data.sourceUnit,
     currentTempUnit
   );
-
   const tempMinUI = convertTemperature(
     data.current.tempMin,
     data.sourceUnit,
@@ -275,7 +273,6 @@ const initTempUnitToggle = () => {
     setCurrentSpeedUnit(savedSpeedUnitLS);
   }
 
-  console.log("Initial temp unit:", getCurrentTempUnit());
   toggleTempUnitBtn.textContent = `°${getCurrentTempUnit()}`;
 
   toggleTempUnitBtn.addEventListener("click", () => {
@@ -302,12 +299,6 @@ const initTempUnitToggle = () => {
       renderTodayDetails(formattedData);
       renderPredictions(formattedData);
     }
-
-    /* if (mockWeatherData) {
-      renderTodayForecast(mockWeatherData);
-      renderTodayDetails(mockWeatherData);
-      renderPredictions(mockWeatherData);
-    } */
   });
 };
 
@@ -348,7 +339,7 @@ export function initUI() {
 
   //Check for data on local storage
   const savedCityLS = getLastSearchedCity();
-  console.log(savedCityLS); //this is logging the temp C/F so ERROR
+
   if (savedCityLS) {
     //Auto-load the saved city
     input.value = savedCityLS;
@@ -384,8 +375,6 @@ export function initUI() {
 
       //Save to local Storage
       saveCity(city);
-
-      console.log(data);
     } catch (error) {
       console.log(error);
       console.error("Search error:", error);
@@ -416,14 +405,5 @@ export function initUI() {
     hideContent();
     clearAllData();
     input.value = "";
-    /* window.location.reload(); */
   });
-
-  /* renderTodayForecast(formattedData);
-  renderTodayDetails(formattedData);
-  renderPredictions(formattedData); */
-
-  /* renderTodayForecast(mockWeatherData);
-  renderTodayDetails(mockWeatherData);
-  renderPredictions(mockWeatherData); */
 }
