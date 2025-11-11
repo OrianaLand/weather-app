@@ -441,7 +441,7 @@ address>p, .time>time, .weather-conditions {
         display: grid;
         grid-template-columns: 1.015fr 1fr;
         grid-template-rows: 1.2fr 1fr;
-        padding: 1em;
+        padding: 0;
         gap: 1.25em;
         max-width: unset;
         width: min(100%, 82rem);
